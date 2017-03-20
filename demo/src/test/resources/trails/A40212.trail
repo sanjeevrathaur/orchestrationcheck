@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<rpc-trail>
+    <snapshot sequence="1" entityName="A40212">
+        <invoke rpcPath="A40212">
+            <rpcFields>
+                <structure order="0" name="Acctbalinqrq">
+                    <field length="8" type="java.math.BigInteger" direction="INPUT_OUTPUT" name="rqAccountnum" order="0"/>
+                    <field length="2" type="java.lang.Integer" direction="INPUT_OUTPUT" name="rqCoid" order="1"/>
+                    <field length="3" direction="INPUT_OUTPUT" name="rqAccounttype" order="2"/>
+                </structure>
+                <structure order="1" name="Acctbalinqrs">
+                    <structure order="0" name="Xstatus">
+                        <field length="40" direction="INPUT_OUTPUT" name="statusmessage" order="0"/>
+                        <field length="1" direction="INPUT_OUTPUT" name="severity" order="1"/>
+                    </structure>
+                    <field length="3" direction="INPUT_OUTPUT" name="rsAccounttype" order="1"/>
+                    <field length="8" type="java.math.BigInteger" direction="INPUT_OUTPUT" name="rsAccountnum" order="2"/>
+                    <field length="40" direction="INPUT_OUTPUT" name="rsProduct" order="3"/>
+                    <field length="25" direction="INPUT_OUTPUT" name="rsAccountname" order="4"/>
+                    <field length="7" type="java.lang.Double" direction="INPUT_OUTPUT" name="rsAvailablebalance" order="5"/>
+                    <field length="7" type="java.lang.Double" direction="INPUT_OUTPUT" name="rsLedgerbalance" order="6"/>
+                    <field length="7" type="java.lang.Double" direction="INPUT_OUTPUT" name="rsLineamount" order="7"/>
+                    <field length="7" type="java.lang.Double" direction="INPUT_OUTPUT" name="rsLoanbalance" order="8"/>
+                </structure>
+            </rpcFields>
+        </invoke>
+        <result>
+            <rpcFields>
+                <structure order="0" name="Acctbalinqrq">
+                    <field value="2147483647" length="8" modified="true" type="java.math.BigInteger" direction="INPUT_OUTPUT" name="rqAccountnum" order="0"/>
+                    <field value="8254" length="2" modified="true" type="java.lang.Integer" direction="INPUT_OUTPUT" name="rqCoid" order="1"/>
+                    <field value="ddd" length="3" modified="true" direction="INPUT_OUTPUT" name="rqAccounttype" order="2"/>
+                </structure>
+                <structure order="1" name="Acctbalinqrs">
+                    <structure order="0" name="Xstatus">
+                        <field value="gggggggggggggggggggggggggggggggggggggggg" length="40" modified="true" direction="INPUT_OUTPUT" name="statusmessage" order="0"/>
+                        <field value="m" length="1" modified="true" direction="INPUT_OUTPUT" name="severity" order="1"/>
+                    </structure>
+                    <field value="nnn" length="3" modified="true" direction="INPUT_OUTPUT" name="rsAccounttype" order="1"/>
+                    <field value="2147483647" length="8" modified="true" type="java.math.BigInteger" direction="INPUT_OUTPUT" name="rsAccountnum" order="2"/>
+                    <field value="pppppppppppppppppppppppppppppppppppppppp" length="40" modified="true" direction="INPUT_OUTPUT" name="rsProduct" order="3"/>
+                    <field value="fffffffffffffffffffffffff" length="25" modified="true" direction="INPUT_OUTPUT" name="rsAccountname" order="4"/>
+                    <field value="2.147483647E7" length="7" modified="true" type="java.lang.Double" direction="INPUT_OUTPUT" name="rsAvailablebalance" order="5"/>
+                    <field value="2.147483647E7" length="7" modified="true" type="java.lang.Double" direction="INPUT_OUTPUT" name="rsLedgerbalance" order="6"/>
+                    <field value="2.147483647E7" length="7" modified="true" type="java.lang.Double" direction="INPUT_OUTPUT" name="rsLineamount" order="7"/>
+                    <field value="2.147483647E7" length="7" modified="true" type="java.lang.Double" direction="INPUT_OUTPUT" name="rsLoanbalance" order="8"/>
+                </structure>
+            </rpcFields>
+        </result>
+    </snapshot>
+</rpc-trail>

@@ -1,0 +1,11 @@
+#
+#Thu Mar 09 17:55:50 IST 2017
+API_SOURCE_FOLDER=src/main/java
+FRONTEND_SOLUTION=JAVA
+GENERATE_TEST=0
+WEB_PACKAGE=com.demo.openlegacy.web
+API_PACKAGE=com.demo.openlegacy
+USE_AJ=1
+BACKEND_SOLUTION=RPC
+DESIGNTIME_CONTEXT=default
+PROVIDER=openlegacy-rpc-mf

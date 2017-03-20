@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:jaxws="http://cxf.apache.org/jaxws" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
+		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.0.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
+		http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd">
+
+	<context:annotation-config />
+	<context:component-scan base-package="com.demomain.openlegacy" />
+	
+	
+
+	<bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping">
+		<property name="order" value="0" />
+	</bean>
+
+	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping">
+		<property name="order" value="1" />
+	</bean>
+
+	
+	<context:component-scan base-package="org.openlegacy.mvc" use-default-filters="false" resource-pattern="*.class">
+		<context:include-filter expression="org.springframework.stereotype.Controller" type="annotation" />
+	</context:component-scan>
+
+	<import resource="classpath:/META-INF/openlegacy-common-basic-context.xml" />
+	
+	<import resource="classpath:/META-INF/openlegacy-basic-cacheable-context.xml" />
+
+	<bean class="org.openlegacy.orchestrating.DefaultOrchestratedPostProcessor" />
+	<bean class="org.openlegacy.orchestrating.DefaultOrchestratedPostProcessorLowestPrecedence"/>
+
+	<bean id="entitiesRegistryManager" class="org.openlegacy.orchestrating.DefaultEntitiesRegistryManager" scope="singleton">
+		<property name="referredContextLocations">
+			<list>
+				<value>classpath*:/META-INF/spring/applicationContext.xml</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean class="org.openlegacy.orchestrating.DefaultOrchestratedRegistry" />
+	<bean class="org.openlegacy.orchestrating.OrchestratedDummyEntitiesRegistry" />
+
+	<bean id="serviceRegistry" class="org.openlegacy.support.SimpleServicesRegistry">
+		<property name="packages">
+			<list>
+				<value>com.demomain.openlegacy</value>
+			</list>
+		</property>
+	</bean>
+
+	<context:property-override location="classpath:application.properties" ignore-unresolvable="true" />
+
+	<bean id="appProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean" p:location="classpath:application.properties"
+		p:ignoreResourceNotFound="false" />
+	<bean class="org.springframework.beans.factory.config.PropertyOverrideConfigurer">
+		<property name="ignoreResourceNotFound">
+			<value>true</value>
+		</property>
+		<property name="ignoreInvalidKeys">
+			<value>true</value>
+		</property>
+		<property name="locations">
+			<list>
+				<value>classpath:/*.properties</value>
+				<value>file:${user.home}/.openlegacy/#{getObject('appProperties') == null?'':@appProperties.getProperty('openLegacyProperties.userPropertiesFolderName')}/*.properties
+				</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="serviceLogger" class="org.openlegacy.log.JdbcServiceLoggerImpl">
+		<property name="tableName" value="${serviceUsage.tableName}" />
+		<property name="durationTableName" value="${serviceUsage.countersTableName}" />
+		<property name="level">
+			<value type="org.openlegacy.log.ApiLogger$Level">${serviceUsage.loggerLevel}</value>
+		</property>
+	</bean>
+
+	<import resource="classpath:/META-INF/spring/spring-security.xml" />
+
+	<context:component-scan base-package="com.demomain.openlegacy.services.controllers" />
+
+	<import resource="classpath*:/META-INF/openlegacy-swagger-jaxrs-context.xml" />
+
+
+
+	<bean id="cacheManager" class="org.openlegacy.cache.ehcache.EhcacheCacheManager" />
+	<bean id="accountBalanceService" class="com.demomain.openlegacy.services.AccountBalanceServiceImpl" />
+</beans>
